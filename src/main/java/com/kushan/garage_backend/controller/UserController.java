@@ -4,10 +4,10 @@ import com.kushan.garage_backend.entity.User;
 import com.kushan.garage_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -23,5 +23,16 @@ public class UserController {
         userService.createCustomer(user);
 
         return "success add user";
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
+        Optional<User> customer = userService.getCustomerById(id);
+
+        if (customer.isPresent()) {
+            return ResponseEntity.ok(customer.get());
+        } else {
+            return ResponseEntity.status(404).body("Customer not found");
+        }
     }
 }
