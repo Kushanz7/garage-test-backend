@@ -25,6 +25,16 @@ public class UserController {
         return "success add user";
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        boolean isUpdated = userService.updateCustomer(id, updatedUser);
+        if (isUpdated) {
+            return ResponseEntity.ok("User updated successfully!");
+        } else {
+            return ResponseEntity.status(404).body("User not found");
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
         Optional<User> customer = userService.getCustomerById(id);

@@ -8,4 +8,6 @@ public interface UserService {
     void createCustomer(User user);
     Optional<User> getCustomerById(Long id);
     Optional<User> findByEmail(String email);
+
+    boolean updateCustomer(Long id, User updatedUser);
 }

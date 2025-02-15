@@ -48,7 +48,9 @@ public class Appointment {
     @Column(name = "service_type")
     private String serviceType;
 
-    @Column(name = "vehicle_type")
-    private String vehicleType;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_number", nullable = false)  // FK from Vehicle table
+    private Vehicle vehicle;
+
 
 }
