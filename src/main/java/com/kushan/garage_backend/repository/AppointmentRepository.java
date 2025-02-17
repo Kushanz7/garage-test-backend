@@ -14,4 +14,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     // Get total revenue for completed appointments
     @Query("SELECT COALESCE(SUM(a.actualPrice), 0) FROM Appointment a WHERE a.jobStatus = 'completed'")
     Double getTotalRevenue();
+    long countByEmployeeId(Long employeeId);
+    long countByEmployeeIdAndJobStatus(Long employeeId, String jobStatus);
+
+    List<Appointment> findByEmployeeId(Long employeeId);
 }

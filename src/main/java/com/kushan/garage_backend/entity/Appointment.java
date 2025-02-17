@@ -33,6 +33,10 @@ public class Appointment {
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = true)  // Allows null values
+    private User employee;
+
     @Column(name = "actual_price", precision = 38, scale = 2)
     private BigDecimal actualPrice;
 

@@ -46,6 +46,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         existingAppointment.setPlaceToFix(appointment.getPlaceToFix());
         existingAppointment.setServiceType(appointment.getServiceType());
         existingAppointment.setVehicle(appointment.getVehicle());
+        existingAppointment.setEmployee(appointment.getEmployee());
         return appointmentRepository.save(existingAppointment);
     }
 

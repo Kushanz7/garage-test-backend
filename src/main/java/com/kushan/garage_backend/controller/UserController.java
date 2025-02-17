@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -45,4 +46,11 @@ public class UserController {
             return ResponseEntity.status(404).body("Customer not found");
         }
     }
+
+    @GetMapping("/employees")
+    public ResponseEntity<List<User>> getAllEmployees() {
+        List<User> employees = userService.getAllUsersByRole("employee");
+        return ResponseEntity.ok(employees);
+    }
+
 }
