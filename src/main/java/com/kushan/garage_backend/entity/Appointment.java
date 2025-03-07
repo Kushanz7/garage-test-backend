@@ -33,6 +33,10 @@ public class Appointment {
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = true)  // Allows null values
+    private User employee;
+
     @Column(name = "actual_price", precision = 38, scale = 2)
     private BigDecimal actualPrice;
 
@@ -48,7 +52,9 @@ public class Appointment {
     @Column(name = "service_type")
     private String serviceType;
 
-    @Column(name = "vehicle_type")
-    private String vehicleType;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_number", nullable = false)  // FK from Vehicle table
+    private Vehicle vehicle;
+
 
 }
