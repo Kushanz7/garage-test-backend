@@ -28,7 +28,7 @@ public class DashboardServiceImpl implements DashboardService {
         // Fetch counts from repositories
         stats.put("totalAppointments", appointmentRepo.count());
         stats.put("pendingAppointments", appointmentRepo.countByAppointmentStatus("pending"));
-        stats.put("completedRepairs", appointmentRepo.countByAppointmentStatus("completed"));
+        stats.put("completedRepairs", appointmentRepo.countByJobStatus("finished"));
         stats.put("registeredUsers", userRepo.count());
         stats.put("availableAutoParts", autoPartRepo.count());
         stats.put("totalRevenue", appointmentRepo.getTotalRevenue());

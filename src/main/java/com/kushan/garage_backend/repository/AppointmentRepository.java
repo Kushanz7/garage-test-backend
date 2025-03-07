@@ -10,9 +10,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findByCustomerId(Long customerId);
     // Count appointments by job status (fix naming issue)
     long countByAppointmentStatus(String appointmentStatus);
-
+    long countByJobStatus(String jobStatus);
     // Get total revenue for completed appointments
-    @Query("SELECT COALESCE(SUM(a.actualPrice), 0) FROM Appointment a WHERE a.jobStatus = 'completed'")
+    @Query("SELECT COALESCE(SUM(a.actualPrice), 0) FROM Appointment a WHERE a.jobStatus = 'finished'")
     Double getTotalRevenue();
     long countByEmployeeId(Long employeeId);
     long countByEmployeeIdAndJobStatus(Long employeeId, String jobStatus);
