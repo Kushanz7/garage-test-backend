@@ -31,6 +31,11 @@ public class User {
     private String nic;
     private String password;
     private String role = "CUSTOMER";
+
     @Enumerated(EnumType.STRING)
     private AuthProvider authProvide;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] profilePicture;
 }
