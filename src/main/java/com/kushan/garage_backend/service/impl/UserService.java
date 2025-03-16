@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -57,5 +59,17 @@ public class UserService {
             return usersRepository.save(user);
         }
         return user;
+    }
+
+    public User findOrCreateGoogleUser(String email, String firstName, String lastName) {
+        Optional<User> existingUser = usersRepository.findByEmail(email);
+        return existingUser.orElseGet(() -> {
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setFirstName(firstName);
+            newUser.setLastName(lastName);
+            newUser.setPassword(""); // No password required for Google users
+            return usersRepository.save(newUser);
+        });
     }
 }
