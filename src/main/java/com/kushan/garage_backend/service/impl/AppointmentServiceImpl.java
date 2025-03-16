@@ -40,10 +40,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         existingAppointment.setAppointmentStatus(appointment.getAppointmentStatus());
         existingAppointment.setBookingDate(appointment.getBookingDate());
         existingAppointment.setJobStatus(appointment.getJobStatus());
-        existingAppointment.setActualPrice(appointment.getActualPrice());
+        existingAppointment.setPrice(appointment.getPrice());
         existingAppointment.setEstimateTime(appointment.getEstimateTime());
         existingAppointment.setJobDescription(appointment.getJobDescription());
-        existingAppointment.setPlaceToFix(appointment.getPlaceToFix());
+        existingAppointment.setService(appointment.getService());
         existingAppointment.setServiceType(appointment.getServiceType());
         existingAppointment.setVehicle(appointment.getVehicle());
         existingAppointment.setEmployee(appointment.getEmployee());

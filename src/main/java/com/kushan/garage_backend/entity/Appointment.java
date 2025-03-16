@@ -1,6 +1,5 @@
 package com.kushan.garage_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,8 +36,8 @@ public class Appointment {
     @JoinColumn(name = "employee_id", nullable = true)  // Allows null values
     private User employee;
 
-    @Column(name = "actual_price", precision = 38, scale = 2)
-    private BigDecimal actualPrice;
+    @Column(name = "price", precision = 38, scale = 2)
+    private BigDecimal price;
 
     @Column(name = "estimate_time")
     private Integer estimateTime; // assuming this is in minutes
@@ -46,8 +45,8 @@ public class Appointment {
     @Column(name = "job_description", length = 1000)
     private String jobDescription;
 
-    @Column(name = "place_to_fix")
-    private String placeToFix;
+    @Column(name = "service")
+    private String service;
 
     @Column(name = "service_type")
     private String serviceType;
