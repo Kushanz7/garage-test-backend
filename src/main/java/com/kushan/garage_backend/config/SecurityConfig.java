@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**", "/login/local")) // Disable CSRF for specific paths
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**", "/login/local", "/api/customer/*/profile-picture")) // Disable CSRF for specific paths
                 .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints

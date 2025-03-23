@@ -103,4 +103,13 @@ public class AppointmentController {
     }
 
 
+    @PutMapping("/{id}/finish")
+    public ResponseEntity<String> finishAppointment(@PathVariable Long id) {
+        try {
+            appointmentService.finishAppointment(id);
+            return ResponseEntity.ok("Appointment status updated to finished.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 }

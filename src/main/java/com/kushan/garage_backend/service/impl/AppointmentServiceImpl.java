@@ -59,4 +59,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findByCustomerId(customerId);
     }
 
+    public void finishAppointment(Long id) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+        appointment.setAppointmentStatus("finished");
+        appointmentRepository.save(appointment);
+    }
+
 }

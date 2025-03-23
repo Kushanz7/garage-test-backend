@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -40,12 +41,15 @@ public class AuthController {
     }
 
     @GetMapping("/loginSuccess")
-    public ResponseEntity<Void> handleGoogleSuccess(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-        User user = userService.loginRegisterByGoogleOAuth2(oAuth2AuthenticationToken);
-        URI homeRedirectUri = URI.create("http://localhost:3000/home?userId=" + user.getId() +
-                "&email=" + user.getEmail() +
-                "&name=" + user.getFirstName());
-        return ResponseEntity.status(HttpStatus.FOUND).location(homeRedirectUri).build();
+    public ResponseEntity<Map<String, Object>> handleGoogleSuccess(OAuth2AuthenticationToken token) {
+        User user = userService.loginRegisterByGoogleOAuth2(token);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("userId", user.getId());
+        response.put("email", user.getEmail());
+        response.put("name", user.getFirstName());
+
+        return ResponseEntity.ok(response);
     }
 
     // 🔹 New endpoint to handle frontend Google login request
