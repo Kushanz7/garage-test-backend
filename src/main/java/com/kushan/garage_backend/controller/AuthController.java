@@ -41,16 +41,16 @@ public class AuthController {
     }
 
     @GetMapping("/loginSuccess")
-    public ResponseEntity<Map<String, Object>> handleGoogleSuccess(OAuth2AuthenticationToken token) {
+    public ResponseEntity<Void> handleGoogleSuccess(OAuth2AuthenticationToken token) {
         User user = userService.loginRegisterByGoogleOAuth2(token);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("userId", user.getId());
-        response.put("email", user.getEmail());
-        response.put("name", user.getFirstName());
+        URI deepLinkUri = URI.create("myapp://oauthSuccess?userId=" + user.getId() +
+                "&email=" + user.getEmail() +
+                "&name=" + user.getFirstName());
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.FOUND).location(deepLinkUri).build();
     }
+
 
 
     // 🔹 New endpoint to handle frontend Google login request
