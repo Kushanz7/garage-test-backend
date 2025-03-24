@@ -52,6 +52,7 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+
     // 🔹 New endpoint to handle frontend Google login request
     @PostMapping("/login/google")
     public ResponseEntity<User> handleGoogleLogin(@RequestBody Map<String, Object> googleUserData) {
