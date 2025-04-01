@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
+
 import java.util.HashMap;
+
+
 import java.util.Map;
 
 @RestController
@@ -51,7 +54,15 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.FOUND).location(deepLinkUri).build();
     }
 
+    // 🔹 New endpoint to handle frontend Google login request
+    @PostMapping("/login/google")
+    public ResponseEntity<User> handleGoogleLogin(@RequestBody Map<String, Object> googleUserData) {
+        String email = (String) googleUserData.get("email");
+        String firstName = (String) googleUserData.get("firstName");
+        String lastName = (String) googleUserData.get("lastName");
 
+        User user = userService.findOrCreateGoogleUser(email, firstName, lastName);
+        return ResponseEntity.ok(user);
 
     // 🔹 New endpoint to handle frontend Google login request
     @PostMapping("/login/google")
@@ -65,5 +76,6 @@ public class AuthController {
 
     }
 
+    }
 
 }
