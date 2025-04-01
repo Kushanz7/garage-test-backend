@@ -11,5 +11,5 @@ public interface AppointmentService {
     Appointment updateAppointment(Long id, Appointment appointment);
     void deleteAppointment(Long id);
     List<Appointment> getAppointmentsByCustomerId(Long customerId);
-
+    void finishAppointment(Long id);
 }

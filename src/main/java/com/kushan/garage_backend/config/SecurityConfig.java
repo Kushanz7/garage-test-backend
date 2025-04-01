@@ -1,5 +1,6 @@
 package com.kushan.garage_backend.config;
 
+import com.kushan.garage_backend.service.impl.CustomOAuth2LoginSuccessHandler;
 import com.kushan.garage_backend.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**", "/login/local")) // Disable CSRF for specific paths
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**", "/login/local", "/api/customer/*/profile-picture")) // Disable CSRF for specific paths
                 .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
@@ -48,6 +49,7 @@ public class SecurityConfig {
                 .httpBasic(withDefaults())
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login/google")
+                        .successHandler(new CustomOAuth2LoginSuccessHandler()) // Use JSON response
                         .defaultSuccessUrl("/loginSuccess", true)
                         .failureUrl("/loginFailure")
                 )

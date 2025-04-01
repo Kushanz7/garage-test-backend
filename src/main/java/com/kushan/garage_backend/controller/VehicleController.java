@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicles")
@@ -32,5 +33,26 @@ public class VehicleController {
     public ResponseEntity<List<Vehicle>> getVehiclesByCustomer(@PathVariable Long customerId) {
         List<Vehicle> vehicles = vehicleService.getVehiclesByCustomerId(customerId);
         return ResponseEntity.ok(vehicles);
+    }
+
+    // ✅ Update Vehicle
+    @PutMapping("/update/{vehicleNumber}")
+    public ResponseEntity<?> updateVehicle(@PathVariable String vehicleNumber, @RequestBody Vehicle updatedVehicle) {
+        Vehicle vehicle = vehicleService.updateVehicle(vehicleNumber, updatedVehicle);
+        if (vehicle != null) {
+            return ResponseEntity.ok(vehicle);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/delete/{vehicleNumber}")
+    public ResponseEntity<?> deleteVehicle(@PathVariable String vehicleNumber) {
+        boolean deleted = vehicleService.deleteVehicle(vehicleNumber);
+        if (deleted) {
+            return ResponseEntity.ok("Vehicle deleted successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

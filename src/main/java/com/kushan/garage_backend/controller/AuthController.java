@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
+
+import java.util.HashMap;
+
+
 import java.util.Map;
 
 @RestController
@@ -40,12 +44,14 @@ public class AuthController {
     }
 
     @GetMapping("/loginSuccess")
-    public ResponseEntity<Void> handleGoogleSuccess(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-        User user = userService.loginRegisterByGoogleOAuth2(oAuth2AuthenticationToken);
-        URI homeRedirectUri = URI.create("http://localhost:3000/home?userId=" + user.getId() +
+    public ResponseEntity<Void> handleGoogleSuccess(OAuth2AuthenticationToken token) {
+        User user = userService.loginRegisterByGoogleOAuth2(token);
+
+        URI deepLinkUri = URI.create("myapp://oauthSuccess?userId=" + user.getId() +
                 "&email=" + user.getEmail() +
                 "&name=" + user.getFirstName());
-        return ResponseEntity.status(HttpStatus.FOUND).location(homeRedirectUri).build();
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(deepLinkUri).build();
     }
 
     // 🔹 New endpoint to handle frontend Google login request
@@ -58,5 +64,18 @@ public class AuthController {
         User user = userService.findOrCreateGoogleUser(email, firstName, lastName);
         return ResponseEntity.ok(user);
 
+    // 🔹 New endpoint to handle frontend Google login request
+    @PostMapping("/login/google")
+    public ResponseEntity<User> handleGoogleLogin(@RequestBody Map<String, Object> googleUserData) {
+        String email = (String) googleUserData.get("email");
+        String firstName = (String) googleUserData.get("firstName");
+        String lastName = (String) googleUserData.get("lastName");
+
+        User user = userService.findOrCreateGoogleUser(email, firstName, lastName);
+        return ResponseEntity.ok(user);
+
     }
+
+    }
+
 }
