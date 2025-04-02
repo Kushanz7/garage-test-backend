@@ -64,18 +64,6 @@ public class AuthController {
         User user = userService.findOrCreateGoogleUser(email, firstName, lastName);
         return ResponseEntity.ok(user);
 
-    // 🔹 New endpoint to handle frontend Google login request
-    @PostMapping("/login/google")
-    public ResponseEntity<User> handleGoogleLogin(@RequestBody Map<String, Object> googleUserData) {
-        String email = (String) googleUserData.get("email");
-        String firstName = (String) googleUserData.get("firstName");
-        String lastName = (String) googleUserData.get("lastName");
-
-        User user = userService.findOrCreateGoogleUser(email, firstName, lastName);
-        return ResponseEntity.ok(user);
-
-    }
-
     }
 
 }
