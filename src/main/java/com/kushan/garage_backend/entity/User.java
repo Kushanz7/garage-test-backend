@@ -31,7 +31,7 @@ public class User {
     private String nic;
     private String password;
     private String role = "CUSTOMER";
-
+    private String address;
     @Enumerated(EnumType.STRING)
     private AuthProvider authProvide;
 

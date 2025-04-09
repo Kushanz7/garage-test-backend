@@ -32,11 +32,11 @@
 			<version>4.1.100.Final</version>
 		</dependency>
 
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-codec-protobuf</artifactId>
-			<version>4.1.100.Final</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.netty</groupId>-->
+<!--			<artifactId>netty-codec-protobuf</artifactId>-->
+<!--			<version>4.1.100.Final</version>-->
+<!--		</dependency>-->
 
 		<!-- Protobuf dependency -->
 		<dependency>
